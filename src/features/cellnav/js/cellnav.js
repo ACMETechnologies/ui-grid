@@ -1000,7 +1000,8 @@
 
               grid.api.cellNav.on.navigate($scope, function () {
                 //focus again because it can be lost
-                 uiGridCtrl.focus();
+                //commenting out scrolling of viewport when cell is clicked with cellNav enabled
+                //uiGridCtrl.focus();
               });
 
             }
