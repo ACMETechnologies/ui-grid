@@ -450,6 +450,9 @@
          * @returns {uiGridCellNavConstants.direction} direction
          */
         getDirection: function (evt) {
+          if (evt.keyCode === uiGridConstants.keymap.ENTER) {
+            return null;
+          }
           if (evt.keyCode === uiGridConstants.keymap.LEFT ||
             (evt.keyCode === uiGridConstants.keymap.TAB && evt.shiftKey)) {
             return uiGridCellNavConstants.direction.LEFT;
@@ -683,7 +686,7 @@
 
                   if (grid.cellNav.lastRowCol === null || grid.cellNav.lastRowCol.row !== newRowCol.row || grid.cellNav.lastRowCol.col !== newRowCol.col){
                     grid.api.cellNav.raise.navigate(newRowCol, grid.cellNav.lastRowCol);
-                    grid.cellNav.lastRowCol = newRowCol;  
+                    grid.cellNav.lastRowCol = newRowCol;
                   }
                   if (uiGridCtrl.grid.options.modifierKeysToMultiSelectCells && modifierDown) {
                     grid.cellNav.focusedCells.push(rowCol);
@@ -1040,6 +1043,8 @@
           // When a cell is clicked, broadcast a cellNav event saying that this row+col combo is now focused
           $elm.find('div').on('click', function (evt) {
             uiGridCtrl.cellNav.broadcastCellNav(new GridRowColumn($scope.row, $scope.col), evt.ctrlKey || evt.metaKey, evt);
+            //emits event - Allows for row selection enhancement when cell is clicked with cellNav enabled
+            $scope.$emit('DataGrid::CellNavCellClicked', {rowCol: new GridRowColumn($scope.row, $scope.col), event: evt});
 
             evt.stopPropagation();
             $scope.$apply();
