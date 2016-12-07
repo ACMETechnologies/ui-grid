@@ -174,13 +174,15 @@ angular.module('ui.grid')
      *   changed dynamically, as they're always recalculated whenever we show the
      *   menu
      * @param {$scope} $scope the scope of this gridMenu, from which we can find all
+     * @param {sortColumns} sortColumns whether or not to sort columns alphabetically
      * the information that we need
      * @returns {array} an array of menu items that can be shown
      */
-    getMenuItems: function( $scope ) {
+    getMenuItems: function( $scope, sortColumns ) {
       var menuItems = [
         // this is where we add any menu items we want to always include
-      ];
+      ],
+        showHideMenuItems = [];
 
       if ( $scope.grid.options.gridMenuCustomItems ){
         if ( !angular.isArray( $scope.grid.options.gridMenuCustomItems ) ){
@@ -204,13 +206,34 @@ angular.module('ui.grid')
 
       menuItems = menuItems.concat( $scope.registeredMenuItems );
 
-      if ( $scope.grid.options.gridMenuShowHideColumns !== false ){
-        menuItems = menuItems.concat( service.showHideColumns( $scope ) );
-      }
-
       menuItems.sort(function(a, b){
         return a.order - b.order;
       });
+
+      //then add columns sorted alphabetically.
+      if ( $scope.grid.options.gridMenuShowHideColumns !== false ){
+        showHideMenuItems = service.showHideColumns( $scope );
+        if (sortColumns) {
+            showHideMenuItems.sort(function(a, b){
+                var r = 0;
+                if (!a.context || !a.context.gridCol.colDef.displayName) {
+                    r = -1;
+                  } else if (!b.context || !b.context.gridCol.colDef.displayName){
+                    r = 1;
+                  } else {
+                    if (a.context.gridCol.colDef.displayName > b.context.gridCol.colDef.displayName) {
+                        r = 1;
+                      } else if (a.context.gridCol.colDef.displayName < b.context.gridCol.colDef.displayName) {
+                        r = -1;
+                      } else {
+                        r = 0;
+                      }
+                  }
+                return r;
+              });
+          }
+        menuItems = menuItems.concat( showHideMenuItems );
+      }
 
       return menuItems;
     },
@@ -381,7 +404,7 @@ function (gridUtil, uiGridConstants, uiGridGridMenuService, i18nService) {
           $scope.$broadcast('hide-menu');
           $scope.shown = false;
         } else {
-          $scope.menuItems = uiGridGridMenuService.getMenuItems( $scope );
+          $scope.menuItems = uiGridGridMenuService.getMenuItems( $scope, true );
           $scope.$broadcast('show-menu');
           $scope.shown = true;
         }

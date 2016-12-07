@@ -4,7 +4,7 @@
   "homepage": "http://ui-grid.info",
   "repository": {
     "type": "git",
-    "url": "https://github.com/angular-ui/ui-grid.info.git"
+    "url": "https://github.com/ACMETechnologies/ui-grid.git"
   },
   "authors": [
     "__Contributors__"
@@ -16,13 +16,14 @@
   ],
   "license": "MIT",
   "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "*",
+    "!dist/",
+    "!dist/**/*",
+    "!bower.json",
+    "!package.json",
+    "!README.md"
   ],
-  "main": ["./ui-grid.css", "./ui-grid.js"],
+  "main": ["./dist/release/ui-grid.css", "./dist/release/ui-grid.js"],
   "devDependencies": {
     "google-code-prettify": "~1.0.2",
     "jquery": "~1.8.0",
