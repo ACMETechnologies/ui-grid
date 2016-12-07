@@ -1,5 +1,5 @@
 /*!
- * ui-grid - v3.2.1 - 2016-12-07
+ * ui-grid - v3.2.1-08acaec - 2016-12-07
  * Copyright (c) 2016 ; License: MIT 
  */
 
@@ -14865,6 +14865,11 @@ module.filter('px', function() {
          * @returns {uiGridCellNavConstants.direction} direction
          */
         getDirection: function (evt) {
+
+          if (evt.keyCode === uiGridConstants.keymap.ENTER) {
+            return null;
+          }
+
           if (evt.keyCode === uiGridConstants.keymap.LEFT ||
             (evt.keyCode === uiGridConstants.keymap.TAB && evt.shiftKey)) {
             return uiGridCellNavConstants.direction.LEFT;
@@ -15455,6 +15460,9 @@ module.filter('px', function() {
           // When a cell is clicked, broadcast a cellNav event saying that this row+col combo is now focused
           $elm.find('div').on('click', function (evt) {
             uiGridCtrl.cellNav.broadcastCellNav(new GridRowColumn($scope.row, $scope.col), evt.ctrlKey || evt.metaKey, evt);
+
+          //emits event - Allows for row selection enhancement when cell is clicked with cellNav enabled
+            $scope.$emit('DataGrid::CellNavCellClicked', {rowCol: new GridRowColumn($scope.row, $scope.col), event: evt});
 
             evt.stopPropagation();
             $scope.$apply();

@@ -119,13 +119,13 @@ describe('ui.grid.edit uiGridCellNavService', function () {
       expect(direction).toBe(uiGridCellNavConstants.direction.LEFT);
     });
 
-    it('should navigate down on enter', function () {
+    it('should not navigate down on enter', function () {
       var evt = jQuery.Event("keydown");
       evt.keyCode = uiGridConstants.keymap.ENTER;
       var colDef = grid.options.columnDefs[0];
       var col = grid.columns[0];
       var direction = uiGridCellNavService.getDirection(evt);
-      expect(direction).toBe(uiGridCellNavConstants.direction.DOWN);
+      expect(direction).toBeNull();
     });
 
     it('should navigate down on down arrow', function () {
@@ -137,14 +137,14 @@ describe('ui.grid.edit uiGridCellNavService', function () {
       expect(direction).toBe(uiGridCellNavConstants.direction.DOWN);
     });
 
-    it('should navigate up on shift enter', function () {
+    it('should not navigate up on shift enter', function () {
       var evt = jQuery.Event("keydown");
       evt.keyCode = uiGridConstants.keymap.ENTER;
       evt.shiftKey = true;
       var colDef = grid.options.columnDefs[0];
       var col = grid.columns[0];
       var direction = uiGridCellNavService.getDirection(evt);
-      expect(direction).toBe(uiGridCellNavConstants.direction.UP);
+      expect(direction).toBeNull();
     });
 
     it('should navigate up on up arrow', function () {
