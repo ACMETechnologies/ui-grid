@@ -1,5 +1,5 @@
 /*!
- * ui-grid - v3.2.1-08acaec - 2016-12-07
+ * ui-grid - v3.2.1-2dd4e78 - 2016-12-30
  * Copyright (c) 2016 ; License: MIT 
  */
 
@@ -15287,7 +15287,7 @@ module.filter('px', function() {
               }
 
               //add an element with no dimensions that can be used to set focus and capture keystrokes
-              var focuser = $compile('<div class="ui-grid-focuser" role="region" aria-live="assertive" aria-atomic="false" tabindex="0" aria-controls="' + grid.id +'-aria-speakable '+ grid.id + '-grid-container' +'" aria-owns="' + grid.id + '-grid-container' + '"></div>')($scope);
+              var focuser = $compile('<div class="ui-grid-focuser" role="region" aria-live="assertive" aria-atomic="false" tabindex="-1" aria-controls="' + grid.id +'-aria-speakable '+ grid.id + '-grid-container' +'" aria-owns="' + grid.id + '-grid-container' + '"></div>')($scope);
               $elm.append(focuser);
 
               focuser.on('focus', function (evt) {
