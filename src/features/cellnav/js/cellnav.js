@@ -1080,7 +1080,11 @@
           function preventMouseDown(evt) {
             //Prevents the foucus event from firing if the click event is already going to fire.
             //If both events fire it will cause bouncing behavior.
-            evt.preventDefault();
+
+            //To make cellNav and ui-grid draggable rows friends. This allows the ng-click event to be fired, which then allows drag and drop.
+            //Tip from: https://github.com/angular-ui/ui-grid/issues/2109
+            // evt.preventDefault();
+            evt.stopPropagation();
           }
 
           //You can only focus on elements with a tabindex value
