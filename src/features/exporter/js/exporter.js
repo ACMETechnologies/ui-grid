@@ -1165,7 +1165,7 @@
           var gridWidth = baseGridWidth + extraColumns;
 
           return exportHeaders.map(function( header ) {
-            return header.width === '*' ? header.width : header.width * grid.options.exporterPdfMaxGridWidth / gridWidth;
+            return 'auto';
           });
 
         },

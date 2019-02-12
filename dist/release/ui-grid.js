@@ -1,5 +1,5 @@
 /*!
- * ui-grid - v3.2.1-a8857792 - 2019-02-12
+ * ui-grid - v3.2.1-ee311347 - 2019-02-12
  * Copyright (c) 2019 ; License: MIT 
  */
 
@@ -18562,7 +18562,7 @@ module.filter('px', function() {
           var gridWidth = baseGridWidth + extraColumns;
 
           return exportHeaders.map(function( header ) {
-            return header.width === '*' ? header.width : header.width * grid.options.exporterPdfMaxGridWidth / gridWidth;
+            return 'auto';
           });
 
         },
