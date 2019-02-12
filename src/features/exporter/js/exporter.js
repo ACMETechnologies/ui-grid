@@ -998,7 +998,7 @@
             if (self.isIE() || navigator.appVersion.indexOf("Edge") !== -1) {
               self.downloadPDF(grid.options.exporterPdfFilename, docDefinition);
             } else {
-              pdfMake.createPdf(docDefinition).open();
+              pdfMake.createPdf(docDefinition).download();
             }
           });
         },

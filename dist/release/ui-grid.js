@@ -1,5 +1,5 @@
 /*!
- * ui-grid - v3.2.1-c47398c6 - 2019-02-12
+ * ui-grid - v3.2.1-a8857792 - 2019-02-12
  * Copyright (c) 2019 ; License: MIT 
  */
 
@@ -18395,7 +18395,7 @@ module.filter('px', function() {
             if (self.isIE() || navigator.appVersion.indexOf("Edge") !== -1) {
               self.downloadPDF(grid.options.exporterPdfFilename, docDefinition);
             } else {
-              pdfMake.createPdf(docDefinition).open();
+              pdfMake.createPdf(docDefinition).download();
             }
           });
         },
