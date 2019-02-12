@@ -995,7 +995,11 @@
             var exportData = self.getData(grid, rowTypes, colTypes);
             var docDefinition = self.prepareAsPdf(grid, exportColumnHeaders, exportData);
 
-            self.downloadPDF(grid.options.exporterPdfFilename, docDefinition);
+            if (self.isIE() || navigator.appVersion.indexOf("Edge") !== -1) {
+              self.downloadPDF(grid.options.exporterPdfFilename, docDefinition);
+            } else {
+              pdfMake.createPdf(docDefinition).open();
+            }
           });
         },
 
@@ -1036,17 +1040,19 @@
             // Previously:  && ieVersion < 10
             // ieVersion now returns a boolean for the
             // sake of sanity. We just check `msSaveBlob` first.
-            var frame = D.createElement('iframe');
-            document.body.appendChild(frame);
+            if (ieVersion) {
+              var frame = D.createElement('iframe');
+              document.body.appendChild(frame);
 
-            frame.contentWindow.document.open("text/html", "replace");
-            frame.contentWindow.document.write(blob);
-            frame.contentWindow.document.close();
-            frame.contentWindow.focus();
-            frame.contentWindow.document.execCommand('SaveAs', true, fileName);
+              frame.contentWindow.document.open("text/html", "replace");
+              frame.contentWindow.document.write(blob);
+              frame.contentWindow.document.close();
+              frame.contentWindow.focus();
+              frame.contentWindow.document.execCommand('SaveAs', true, fileName);
 
-            document.body.removeChild(frame);
-            return true;
+              document.body.removeChild(frame);
+              return true;
+            }
           });
         },
 
