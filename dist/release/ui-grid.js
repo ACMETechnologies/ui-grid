@@ -1,6 +1,6 @@
 /*!
- * ui-grid - v3.2.1-d58173e - 2018-01-11
- * Copyright (c) 2018 ; License: MIT 
+ * ui-grid - v3.2.1-ee311347 - 2019-02-12
+ * Copyright (c) 2019 ; License: MIT 
  */
 
 (function () {
@@ -18395,7 +18395,7 @@ module.filter('px', function() {
             if (self.isIE() || navigator.appVersion.indexOf("Edge") !== -1) {
               self.downloadPDF(grid.options.exporterPdfFilename, docDefinition);
             } else {
-              pdfMake.createPdf(docDefinition).open();
+              pdfMake.createPdf(docDefinition).download();
             }
           });
         },
@@ -18562,7 +18562,7 @@ module.filter('px', function() {
           var gridWidth = baseGridWidth + extraColumns;
 
           return exportHeaders.map(function( header ) {
-            return header.width === '*' ? header.width : header.width * grid.options.exporterPdfMaxGridWidth / gridWidth;
+            return 'auto';
           });
 
         },

@@ -998,7 +998,7 @@
             if (self.isIE() || navigator.appVersion.indexOf("Edge") !== -1) {
               self.downloadPDF(grid.options.exporterPdfFilename, docDefinition);
             } else {
-              pdfMake.createPdf(docDefinition).open();
+              pdfMake.createPdf(docDefinition).download();
             }
           });
         },
@@ -1165,7 +1165,7 @@
           var gridWidth = baseGridWidth + extraColumns;
 
           return exportHeaders.map(function( header ) {
-            return header.width === '*' ? header.width : header.width * grid.options.exporterPdfMaxGridWidth / gridWidth;
+            return 'auto';
           });
 
         },
