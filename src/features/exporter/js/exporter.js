@@ -1165,7 +1165,7 @@
           var gridWidth = baseGridWidth + extraColumns;
 
           return exportHeaders.map(function( header ) {
-            return 'auto';
+            return header.width === '*' ? header.width : header.width * grid.options.exporterPdfMaxGridWidth / gridWidth;
           });
 
         },
@@ -1213,7 +1213,7 @@
           }
 
           if (field.alignment && typeof(field.alignment) === 'string' ){
-            returnVal = { text: returnVal, alignment: field.alignment };
+            returnVal = { text: returnVal, alignment: field.alignment, noWrap: true };
           }
 
           return returnVal;
