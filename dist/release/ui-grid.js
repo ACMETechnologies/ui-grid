@@ -1,5 +1,5 @@
 /*!
- * ui-grid - v3.2.1-ee311347 - 2019-02-12
+ * ui-grid - v3.2.1-35ceec03 - 2019-02-19
  * Copyright (c) 2019 ; License: MIT 
  */
 
@@ -18562,7 +18562,7 @@ module.filter('px', function() {
           var gridWidth = baseGridWidth + extraColumns;
 
           return exportHeaders.map(function( header ) {
-            return 'auto';
+            return header.width === '*' ? header.width : header.width * grid.options.exporterPdfMaxGridWidth / gridWidth;
           });
 
         },
@@ -18610,7 +18610,7 @@ module.filter('px', function() {
           }
 
           if (field.alignment && typeof(field.alignment) === 'string' ){
-            returnVal = { text: returnVal, alignment: field.alignment };
+            returnVal = { text: returnVal, alignment: field.alignment, noWrap: true };
           }
 
           return returnVal;
